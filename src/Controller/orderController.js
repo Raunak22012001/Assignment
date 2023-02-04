@@ -46,6 +46,8 @@ const getorder = async (req, res) => {
     try {
         let userId = req.params.id
 
+        if( req.loggedInUserId !=userId.toString())return res.status(403).send({ status: false, message: 'user_id is no authorized' })
+
         const data = await orderModel.find({ user_id: userId })
         if(!data)return res.status(404).send({ status: false, message: "order not found " })
 
