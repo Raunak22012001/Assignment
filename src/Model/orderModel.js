@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
+const objectId=mongoose.Schema.Types.ObjectId
 
-const userSchema = new mongoose.Schema({
 
-    name:{type:String, required :true},
-    phone_Number:{type:Number,required:true,unique:true},
-    password:{type:String,required:true}
-},{timestamps:true})
-module.exports=mongoose.model("User",userSchema)
+const orderSchema = new mongoose.Schema({
+    user_id: { type: objectId,ref:"User" ,required: true },
+    sub_total: { type: Number, required: true },
+    phone_Number: { type: Number, required: true }
+}, { timestamps: true })
+
+module.exports = mongoose.model("Order", orderSchema)
